@@ -19,6 +19,22 @@
             "jestConfig": "libs/a-very-simple-lib/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "open-ct": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cypress open-ct",
+            "cwd": "libs/a-very-simple-lib"
+          }
+        },
+        "ct": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "testingType": "component",
+            "cypressConfig": "libs/a-very-simple-lib/cypress.json",
+            "tsConfig": "libs/a-very-simple-lib/tsconfig.ct.json",
+            "devServerTarget": ""
+          }
         }
       }
     },
