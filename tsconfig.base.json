@@ -14,7 +14,17 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@demo-cypress-component-test/a-very-simple-lib": [
+        "libs/a-very-simple-lib/src/index.ts"
+      ],
+      "@demo-cypress-component-test/but-this-is-just-as-simple": [
+        "libs/but-this-is-just-as-simple/src/index.ts"
+      ],
+      "@demo-cypress-component-test/something-shared": [
+        "libs/something-shared/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

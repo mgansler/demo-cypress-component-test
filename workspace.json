@@ -1,7 +1,192 @@
 {
   "version": 2,
-  "projects": {},
+  "projects": {
+    "a-very-simple-lib": {
+      "root": "libs/a-very-simple-lib",
+      "sourceRoot": "libs/a-very-simple-lib/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/a-very-simple-lib/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/a-very-simple-lib"],
+          "options": {
+            "jestConfig": "libs/a-very-simple-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "but-this-is-just-as-simple": {
+      "root": "libs/but-this-is-just-as-simple",
+      "sourceRoot": "libs/but-this-is-just-as-simple/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/but-this-is-just-as-simple/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/but-this-is-just-as-simple"],
+          "options": {
+            "jestConfig": "libs/but-this-is-just-as-simple/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "demo-app": {
+      "root": "apps/demo-app",
+      "sourceRoot": "apps/demo-app/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/demo-app",
+            "index": "apps/demo-app/src/index.html",
+            "main": "apps/demo-app/src/main.tsx",
+            "polyfills": "apps/demo-app/src/polyfills.ts",
+            "tsConfig": "apps/demo-app/tsconfig.app.json",
+            "assets": [
+              "apps/demo-app/src/favicon.ico",
+              "apps/demo-app/src/assets"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/demo-app/src/environments/environment.ts",
+                  "with": "apps/demo-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "demo-app:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "demo-app:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/demo-app/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/demo-app"],
+          "options": {
+            "jestConfig": "apps/demo-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "demo-app-e2e": {
+      "root": "apps/demo-app-e2e",
+      "sourceRoot": "apps/demo-app-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/demo-app-e2e/cypress.json",
+            "tsConfig": "apps/demo-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "demo-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "demo-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/demo-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "something-shared": {
+      "root": "libs/something-shared",
+      "sourceRoot": "libs/something-shared/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/something-shared/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/something-shared"],
+          "options": {
+            "jestConfig": "libs/something-shared/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "none",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "none"
+      },
+      "library": {
+        "style": "none",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "demo-app"
 }
